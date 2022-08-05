@@ -5,21 +5,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.Table;
 
-@Data
-@Builder
 @Entity
+@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentInfo {
+
+@Table(name = "payment_method")
+public class PaymentMethod {
     @Id
     private Integer id;
-    private Integer user_id;
-    private String card_sender;
-    private String card_receiver;
-    private String name_sender;
-    private Date created_at;
+
+    @Column(name = "name_method")
+    private String name_method;
 }
