@@ -12,7 +12,11 @@ import java.util.List;
 @Service
 public class CommentsServiceImpl implements CommentsService {
 
-    private CommentsRepository commentsRepository;
+    private final CommentsRepository commentsRepository;
+
+    public CommentsServiceImpl(CommentsRepository commentsRepository){
+        this.commentsRepository = commentsRepository;
+    }
 
 
     @Override
