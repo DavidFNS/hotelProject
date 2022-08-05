@@ -3,10 +3,9 @@ package hotel.service.impl;
 import hotel.dto.CommentsDto;
 import hotel.dto.ResponseDto;
 import hotel.entity.Comments;
+import hotel.mapper.CommentsMap;
 import hotel.repository.CommentsRepository;
 import hotel.service.CommentsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,15 +22,7 @@ public class CommentsServiceImpl implements CommentsService {
 
     @Override
     public ResponseDto addComment(CommentsDto commentsDto) {
-        Comments comments = Comments.builder()
-                .id(commentsDto.getId())
-                .id_comment_type(commentsDto.getId_comment_type())
-                .comment(commentsDto.getComment())
-                .user_id(commentsDto.getUser_id())
-                .status(commentsDto.getStatus())
-                .created_at(commentsDto.getCreated_at())
-                .build();
-        commentsRepository.save(comments);
+        commentsRepository.save(CommentsMap.parseToEntity(commentsDto));
         try {
             return ResponseDto.builder()
                     .code(200)
@@ -70,27 +61,17 @@ public class CommentsServiceImpl implements CommentsService {
     public ResponseDto<List<CommentsDto>> getComment() {
         List<Comments> comments = commentsRepository.findAll();
         List<CommentsDto> commentsDtos = comments.stream()
-                .map(i -> CommentsDto.builder()
-                        .id(i.getId())
-                        .id_comment_type(i.getId_comment_type())
-                        .user_id(i.getUser_id())
-                        .comment(i.getComment())
-                        .status(i.getStatus())
-                        .created_at(i.getCreated_at())
-                        .build())
+                .map(CommentsMap::parseToDto)
                 .toList();
-        ResponseDto<List<CommentsDto>> responseDto = new ResponseDto<>(200, true, "OK", commentsDtos);
-        return responseDto;
+        return new ResponseDto<>(200, true, "OK", commentsDtos);
     }
 
     @Override
     public ResponseDto<CommentsDto> findById(Integer id) {
         if (commentsRepository.existsById(id)) {
-
             Comments comments = (commentsRepository.findById(id)).get();
-
-
+            return new ResponseDto<>(200, true, "OK", CommentsMap.parseToDto(comments));
         }
-        return null;
+        return new ResponseDto<>(404, false, "Not working", null);
     }
 }

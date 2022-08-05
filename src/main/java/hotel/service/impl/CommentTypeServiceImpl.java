@@ -16,7 +16,8 @@ public class CommentTypeServiceImpl implements CommentTypeService {
     }
 
     @Override
-    public ResponseDto<CommentTypeDto> addCommentType(CommentTypeDto commentTypeDto) {
+    public ResponseDto addCommentType(CommentTypeDto commentTypeDto) {
+
         return null;
     }
 

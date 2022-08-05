@@ -6,7 +6,7 @@ import hotel.dto.ResponseDto;
 import java.util.List;
 
 public interface CommentTypeService {
-    ResponseDto<CommentTypeDto> addCommentType(CommentTypeDto commentTypeDto);
+    ResponseDto addCommentType(CommentTypeDto commentTypeDto);
 
     ResponseDto updateCommentType(CommentTypeDto commentTypeDto);
 
