@@ -1,18 +1,24 @@
 package hotel.service;
 
+import hotel.dto.ResponseDto;
+import hotel.dto.UsersDto;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
+
 public interface UserService {
-    /**
-     * Add new User to data
-     * @param UserDto Info about user
-     * @return ResponseDto - code -1 when exception occurs, 0 when all is OK.
-     */
+    ResponseDto<UsersDto> addUser(UsersDto usersDto);
+
+    ResponseDto updateUser(UsersDto usersDto);
+
+    ResponseDto deleteUser(Integer id);
+
+    ResponseDto<List<UsersDto>> getUser();
+
+    ResponseDto<UsersDto> findById(Integer id);
+
+
+
+
 
 }
-//SOLID
-/*
-* S - Single responsibility
-* O - Open closed principle
-* L - Liskov substitution
-* I - Interface aggregation
-* D - Dependency inversion
-* */

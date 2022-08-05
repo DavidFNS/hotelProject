@@ -1,4 +1,14 @@
 package hotel.dto;
 
-public class ResponseDto {
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class ResponseDto<T> {
+    private int code;
+    private boolean success;
+    private String message;
+    private T data;
+
 }
