@@ -2,11 +2,16 @@ package hotel.service.impl;
 
 import hotel.dto.ResponseDto;
 import hotel.dto.UsersDto;
+import hotel.repository.UsersRepository;
 import hotel.service.UserService;
 
 import java.util.List;
 
 public class UsersServiceImpl implements UserService {
+
+    private UsersRepository usersRepository;
+
+
 
     @Override
     public ResponseDto<UsersDto> addUser(UsersDto usersDto) {
