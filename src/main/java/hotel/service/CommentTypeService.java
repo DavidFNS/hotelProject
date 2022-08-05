@@ -1,24 +1,20 @@
 package hotel.service;
 
+import hotel.dto.CommentTypeDto;
 import hotel.dto.ResponseDto;
 import hotel.dto.UsersDto;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
-public interface UserService {
-    ResponseDto<UsersDto> addUser(UsersDto usersDto);
+public interface CommentTypeService {
+    ResponseDto<CommentTypeDto> addUser(CommentTypeDto commentTypeDto);
 
-    ResponseDto updateUser(UsersDto usersDto);
+    ResponseDto updateUser(CommentTypeDto );
 
     ResponseDto deleteUser(Integer id);
 
     ResponseDto<List<UsersDto>> getUser();
 
     ResponseDto<UsersDto> findById(Integer id);
-
-
-
-
 
 }
