@@ -10,8 +10,8 @@ public class RoomServicesMap {
         if (roomServices == null) return null;
         return RoomServicesDto.builder()
                 .id(roomServices.getId())
-                .roomId(roomServices.getRoomId())
                 .serviceId(roomServices.getServiceId())
+                .roomId(roomServices.getRoomId())
                 .build();
     }
 
@@ -21,8 +21,8 @@ public class RoomServicesMap {
         if (roomServicesDto == null) return null;
         return RoomServices.builder()
                 .id(roomServicesDto.getId())
-                .roomId(roomServicesDto.getRoomId())
                 .serviceId(roomServicesDto.getServiceId())
+                .roomId(roomServicesDto.getRoomId())
                 .build();
     }
 }
