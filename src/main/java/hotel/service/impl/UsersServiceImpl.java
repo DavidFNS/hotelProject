@@ -11,8 +11,6 @@ public class UsersServiceImpl implements UserService {
 
     private UsersRepository usersRepository;
 
-
-
     @Override
     public ResponseDto<UsersDto> addUser(UsersDto usersDto) {
 
@@ -30,7 +28,7 @@ public class UsersServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseDto<List<UsersDto>> getUser() {
+    public ResponseDto<List<UsersDto>> getAllUsers() {
         return null;
     }
 

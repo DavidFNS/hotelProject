@@ -15,7 +15,6 @@ public class BookingDto {
     private Date out_date;
     private Integer count_senior;
     private Integer count_junior;
-    private float total_price;
+    private double total_price;
     private Date created_at;
-
 }
