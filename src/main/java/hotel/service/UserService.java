@@ -13,12 +13,7 @@ public interface UserService {
 
     ResponseDto deleteUser(Integer id);
 
-    ResponseDto<List<UsersDto>> getUser();
+    ResponseDto<List<UsersDto>> getAllUsers();
 
     ResponseDto<UsersDto> findById(Integer id);
-
-
-
-
-
 }
