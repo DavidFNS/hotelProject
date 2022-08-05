@@ -13,6 +13,6 @@ public class AdminsDto {
     private String password;
     private String card_number;
     private String valid_date;
-    private Float balance;
+    private Double balance;
     private Date created_at;
 }

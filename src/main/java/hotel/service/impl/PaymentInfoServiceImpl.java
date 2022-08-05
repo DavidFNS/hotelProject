@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PaymentInfoServiceImpl implements PaymentInfoService {
 
-    private PaymentInfoRepository paymentInfoRepository;
+    private final PaymentInfoRepository paymentInfoRepository;
 
     public PaymentInfoServiceImpl(PaymentInfoRepository paymentInfoRepository) {
         this.paymentInfoRepository = paymentInfoRepository;

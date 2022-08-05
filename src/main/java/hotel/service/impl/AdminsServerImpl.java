@@ -7,7 +7,7 @@ import hotel.service.AdminsService;
 
 public class AdminsServerImpl implements AdminsService {
 
-    private AdminsRepository adminsRepository;
+    private final AdminsRepository adminsRepository;
 
     public AdminsServerImpl(AdminsRepository adminsRepository) {
         this.adminsRepository = adminsRepository;
