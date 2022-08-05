@@ -4,9 +4,10 @@ import hotel.dto.PaymentInfoDto;
 import hotel.dto.ResponseDto;
 import hotel.repository.PaymentInfoRepository;
 import hotel.service.PaymentInfoService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class PaymentInfoServiceImpl implements PaymentInfoService {
 
     private final PaymentInfoRepository paymentInfoRepository;
