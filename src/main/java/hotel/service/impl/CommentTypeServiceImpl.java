@@ -9,29 +9,29 @@ import java.util.List;
 
 public class CommentTypeServiceImpl implements CommentTypeService {
 
-    private CommentTypeRepository commentTypeRepository;
+    private final CommentTypeRepository commentTypeRepository;
 
     public CommentTypeServiceImpl(CommentTypeRepository commentTypeRepository){
         this.commentTypeRepository = commentTypeRepository;
     }
 
     @Override
-    public ResponseDto<CommentTypeDto> addCommentTypeDto(CommentTypeDto commentTypeDto) {
+    public ResponseDto<CommentTypeDto> addCommentType(CommentTypeDto commentTypeDto) {
         return null;
     }
 
     @Override
-    public ResponseDto updateCommentTypeDto(CommentTypeDto commentTypeDto) {
+    public ResponseDto updateCommentType(CommentTypeDto commentTypeDto) {
         return null;
     }
 
     @Override
-    public ResponseDto deleteCommentTypeDto(Integer id) {
+    public ResponseDto deleteCommentType(Integer id) {
         return null;
     }
 
     @Override
-    public ResponseDto<List<CommentTypeDto>> getCommentTypeDto() {
+    public ResponseDto<List<CommentTypeDto>> getCommentType() {
         return null;
     }
 

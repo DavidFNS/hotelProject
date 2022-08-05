@@ -9,9 +9,11 @@ import java.util.List;
 
 public class UsersServiceImpl implements UserService {
 
-    private UsersRepository usersRepository;
+    private final UsersRepository usersRepository;
 
-
+    public UsersServiceImpl(UsersRepository usersRepository){
+        this.usersRepository = usersRepository;
+    }
 
     @Override
     public ResponseDto<UsersDto> addUser(UsersDto usersDto) {
