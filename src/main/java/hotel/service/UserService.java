@@ -17,8 +17,4 @@ public interface UserService {
 
     ResponseDto<UsersDto> findById(Integer id);
 
-
-
-
-
 }
