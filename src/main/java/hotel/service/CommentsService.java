@@ -6,9 +6,7 @@ import hotel.dto.ResponseDto;
 import java.util.List;
 
 public interface CommentsService {
-    ResponseDto<CommentsDto> addComment(CommentsDto commentsDto);
-
-    ResponseDto updateComment(CommentsDto commentsDto);
+    ResponseDto addComment(CommentsDto commentsDto);
 
     ResponseDto deleteComment(Integer id);
 

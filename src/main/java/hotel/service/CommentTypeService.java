@@ -6,13 +6,13 @@ import hotel.dto.ResponseDto;
 import java.util.List;
 
 public interface CommentTypeService {
-    ResponseDto<CommentTypeDto> addCommentTypeDto(CommentTypeDto commentTypeDto);
+    ResponseDto addCommentType(CommentTypeDto commentTypeDto);
 
-    ResponseDto updateCommentTypeDto(CommentTypeDto commentTypeDto);
+    ResponseDto updateCommentType(CommentTypeDto commentTypeDto);
 
-    ResponseDto deleteCommentTypeDto(Integer id);
+    ResponseDto deleteCommentType(Integer id);
 
-    ResponseDto<List<CommentTypeDto>> getCommentTypeDto();
+    ResponseDto<List<CommentTypeDto>> getCommentType();
 
     ResponseDto<CommentTypeDto> findById(Integer id);
 
