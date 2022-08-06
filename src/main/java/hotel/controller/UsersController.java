@@ -1,9 +1,7 @@
 package hotel.controller;
 
-import hotel.dto.CommentsDto;
 import hotel.dto.ResponseDto;
 import hotel.dto.UsersDto;
-import hotel.service.impl.CommentsServiceImpl;
 import hotel.service.impl.UsersServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +30,8 @@ public class UsersController {
         return usersService.addUser(usersDto);
     }
 
-    @DeleteMapping
-    public ResponseDto deleteUser(@RequestParam Integer id){
+    @DeleteMapping("/{id}")
+    public ResponseDto deleteUser(@PathVariable Integer id){
         return usersService.deleteUser(id);
     }
 

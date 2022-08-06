@@ -2,11 +2,8 @@ package hotel.controller;
 
 import hotel.dto.CommentsDto;
 import hotel.dto.ResponseDto;
-import hotel.entity.Comments;
 import hotel.service.impl.CommentsServiceImpl;
 import org.springframework.web.bind.annotation.*;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @RestController
