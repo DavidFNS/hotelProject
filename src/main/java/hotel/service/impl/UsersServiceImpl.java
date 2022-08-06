@@ -2,6 +2,7 @@ package hotel.service.impl;
 
 import hotel.dto.ResponseDto;
 import hotel.dto.UsersDto;
+import hotel.entity.CommentType;
 import hotel.entity.Users;
 import hotel.mapper.UsersMap;
 import hotel.repository.UsersRepository;
@@ -63,13 +64,20 @@ public class UsersServiceImpl implements UserService {
 
     @Override
     public ResponseDto deleteUser(Integer id) {
-        if (usersRepository.existsById(id)){
-            Optional<Users> optional = usersRepository.findById(id);
-            UsersDto userDto = UsersMap.parseToDto(optional.get());
-
-            return new ResponseDto(200, true, "OK", null);
+        Optional<Users> optional = usersRepository.findById(id);
+        if (optional.isPresent()){
+            usersRepository.delete(optional.get());
+            return ResponseDto.builder()
+                    .code(200)
+                    .success(true)
+                    .message("OK")
+                    .build();
         }
-        return new ResponseDto(404,false, "Not working", null);
+        return ResponseDto.builder()
+                .code(404)
+                .success(false)
+                .message("Not working!")
+                .build();
     }
 
     @Override
