@@ -7,7 +7,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 public interface UserService {
-    ResponseDto<UsersDto> addUser(UsersDto usersDto);
+    ResponseDto addUser(UsersDto usersDto);
 
     ResponseDto updateUser(UsersDto usersDto);
 

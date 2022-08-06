@@ -19,7 +19,7 @@ public class UsersDto {
 
     private String password;
 
-    private Date age;
+    private Integer age;
 
     private String phoneNumber;
 
