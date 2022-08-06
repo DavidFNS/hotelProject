@@ -1,4 +1,4 @@
-package hotel.controller.repository;
+package hotel.repository;
 
 import hotel.entity.RoomServices;
 import org.springframework.data.jpa.repository.JpaRepository;
