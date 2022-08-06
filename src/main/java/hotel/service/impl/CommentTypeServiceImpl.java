@@ -4,9 +4,10 @@ import hotel.dto.CommentTypeDto;
 import hotel.dto.ResponseDto;
 import hotel.repository.CommentTypeRepository;
 import hotel.service.CommentTypeService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class CommentTypeServiceImpl implements CommentTypeService {
 
     private final CommentTypeRepository commentTypeRepository;
