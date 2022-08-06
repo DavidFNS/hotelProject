@@ -32,7 +32,7 @@ public class UsersServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseDto<List<UsersDto>> getUser() {
+    public ResponseDto<List<UsersDto>> getAllUsers() {
         return null;
     }
 
