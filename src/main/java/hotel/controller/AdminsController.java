@@ -1,9 +1,7 @@
 package hotel.controller;
 
-
 import hotel.dto.AdminsDto;
 import hotel.dto.ResponseDto;
-import hotel.dto.UsersDto;
 import hotel.service.impl.AdminsServerImpl;
 import org.springframework.web.bind.annotation.*;
 

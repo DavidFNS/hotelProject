@@ -2,7 +2,6 @@ package hotel.service;
 
 import hotel.dto.BookingDto;
 import hotel.dto.ResponseDto;
-import hotel.repository.BookingRepository;
 
 import java.util.List;
 

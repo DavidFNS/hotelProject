@@ -2,8 +2,6 @@ package hotel.controller;
 
 import hotel.dto.BookingDto;
 import hotel.dto.ResponseDto;
-import hotel.entity.Booking;
-import hotel.service.BookingService;
 import hotel.service.impl.BookingServiceImpl;
 import org.springframework.web.bind.annotation.*;
 

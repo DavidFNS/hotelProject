@@ -3,7 +3,6 @@ package hotel.service;
 import hotel.dto.ResponseDto;
 import hotel.dto.UsersDto;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 public interface UserService {

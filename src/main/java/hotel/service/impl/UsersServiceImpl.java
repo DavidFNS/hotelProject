@@ -2,7 +2,6 @@ package hotel.service.impl;
 
 import hotel.dto.ResponseDto;
 import hotel.dto.UsersDto;
-import hotel.entity.CommentType;
 import hotel.entity.Users;
 import hotel.mapper.UsersMap;
 import hotel.repository.UsersRepository;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 @Service
 public class UsersServiceImpl implements UserService {
 
