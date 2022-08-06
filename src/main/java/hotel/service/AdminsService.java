@@ -5,7 +5,7 @@ import hotel.dto.ResponseDto;
 
 public interface AdminsService {
 
-    ResponseDto<AdminsDto> AddNewAdmin(AdminsDto adminsDto);
+    ResponseDto<AdminsDto> addNewAdmin(AdminsDto adminsDto);
 
-    ResponseDto UpdateAdminInfo(AdminsDto adminsDto);
+    ResponseDto updateAdminInfo(AdminsDto adminsDto);
 }

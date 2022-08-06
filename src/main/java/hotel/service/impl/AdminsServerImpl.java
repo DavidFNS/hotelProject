@@ -18,7 +18,7 @@ public class AdminsServerImpl implements AdminsService {
     }
 
     @Override
-    public ResponseDto AddNewAdmin(AdminsDto adminsDto) {
+    public ResponseDto addNewAdmin(AdminsDto adminsDto) {
         Admins admins = AdminMap.parsToEntity(adminsDto);
         adminsRepository.save(admins);
 
@@ -26,7 +26,7 @@ public class AdminsServerImpl implements AdminsService {
     }
 
     @Override
-    public ResponseDto UpdateAdminInfo(AdminsDto adminsDto) {
+    public ResponseDto updateAdminInfo(AdminsDto adminsDto) {
         if(adminsRepository.existsById(adminsDto.getId())){
             Admins admins = AdminMap.parsToEntity(adminsDto);
             adminsRepository.save(admins);
