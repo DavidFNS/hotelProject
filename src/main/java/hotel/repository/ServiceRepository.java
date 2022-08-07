@@ -1,10 +1,10 @@
 package hotel.repository;
 
-import hotel.entity.Service;
+import hotel.entity.Servicee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ServiceRepository extends JpaRepository<Service, Integer> {
+public interface ServiceRepository extends JpaRepository<Servicee, Integer> {
 
 }

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Table(name = "service")
 @Builder
-public class Service {
+public class Servicee {
 
     @Id
     @Column(name = "id")

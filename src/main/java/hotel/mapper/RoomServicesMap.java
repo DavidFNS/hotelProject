@@ -1,7 +1,9 @@
 package hotel.mapper;
 
 import hotel.dto.RoomServicesDto;
+import hotel.dto.RoomsDto;
 import hotel.entity.RoomServices;
+import hotel.service.RoomsService;
 
 public class RoomServicesMap {
 

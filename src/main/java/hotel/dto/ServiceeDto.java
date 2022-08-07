@@ -3,11 +3,9 @@ package hotel.dto;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 @Data
 @Builder
-public class ServiceDto {
+public class ServiceeDto {
 
     private Integer id;
     private String name;
