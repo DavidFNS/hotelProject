@@ -6,6 +6,8 @@ import hotel.entity.Users;
 import hotel.mapper.UsersMap;
 import hotel.repository.UsersRepository;
 import hotel.service.UserService;
+import hotel.service.mapper.UsersMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.Optional;
 @Service
 public class UsersServiceImpl implements UserService {
 
+    @Autowired
+    private UsersMapper usersMapper;
     private final UsersRepository usersRepository;
 
     public UsersServiceImpl(UsersRepository usersRepository){
@@ -22,7 +26,7 @@ public class UsersServiceImpl implements UserService {
 
     @Override
     public ResponseDto addUser(UsersDto usersDto) {
-        Users user = UsersMap.parseToEntity(usersDto);
+        Users user = usersMapper.toEntity(usersDto);
         usersRepository.save(user);
         try {
             return ResponseDto.builder()
