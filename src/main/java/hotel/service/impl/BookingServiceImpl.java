@@ -66,7 +66,7 @@ public class BookingServiceImpl implements BookingService {
             responseDto = new ResponseDto<>(200,true,"OK",bookingDto);
             return responseDto;
         }
-        responseDto = new ResponseDto<>(200,true,"OK", null);
+        responseDto = new ResponseDto<>(404,false,"Not found", null);
 
         return responseDto;
     }
