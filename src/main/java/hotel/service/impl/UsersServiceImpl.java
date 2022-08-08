@@ -3,7 +3,6 @@ package hotel.service.impl;
 import hotel.dto.ResponseDto;
 import hotel.dto.UsersDto;
 import hotel.entity.Users;
-import hotel.mapper.UsersMap;
 import hotel.repository.UsersRepository;
 import hotel.service.UserService;
 import hotel.service.mapper.UsersMapper;
@@ -109,6 +108,6 @@ public class UsersServiceImpl implements UserService {
     @Override
     public ResponseDto<UsersDto> findById(Integer id) {
         Optional<Users> optional = usersRepository.findById(id);
-        return optional.map(users -> new ResponseDto<>(200, true, "OK", UsersMap.parseToDto(users))).orElseGet(() -> new ResponseDto<>(404, false, "Not working", null));
+        return optional.map(users -> new ResponseDto<>(200, true, "OK", usersMapper.toDto(users))).orElseGet(() -> new ResponseDto<>(404, false, "Not working", null));
     }
 }

@@ -3,9 +3,9 @@ package hotel.service.impl;
 import hotel.dto.CommentTypeDto;
 import hotel.dto.ResponseDto;
 import hotel.entity.CommentType;
-import hotel.mapper.CommentTypeMap;
 import hotel.repository.CommentTypeRepository;
 import hotel.service.CommentTypeService;
+import hotel.service.mapper.CommentTypeMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,14 +15,16 @@ import java.util.Optional;
 public class CommentTypeServiceImpl implements CommentTypeService {
 
     private final CommentTypeRepository commentTypeRepository;
+    private final CommentTypeMapper commentTypeMapper;
 
-    public CommentTypeServiceImpl(CommentTypeRepository commentTypeRepository){
+    public CommentTypeServiceImpl(CommentTypeRepository commentTypeRepository, CommentTypeMapper commentTypeMapper){
         this.commentTypeRepository = commentTypeRepository;
+        this.commentTypeMapper = commentTypeMapper;
     }
 
     @Override
     public ResponseDto addCommentType(CommentTypeDto commentTypeDto) {
-        CommentType commentType = CommentTypeMap.parseToEntity(commentTypeDto);
+        CommentType commentType = commentTypeMapper.toEntity(commentTypeDto);
         commentTypeRepository.save(commentType);
         try {
             return ResponseDto.builder()
@@ -103,7 +105,7 @@ public class CommentTypeServiceImpl implements CommentTypeService {
     public ResponseDto<CommentTypeDto> findById(Integer id) {
         Optional<CommentType> optional = commentTypeRepository.findById(id);
         if (optional.isPresent()){
-            CommentTypeDto commentTypeDto = CommentTypeMap.parseToDto(optional.get());
+            CommentTypeDto commentTypeDto = commentTypeMapper.toDto(optional.get());
             return new ResponseDto<>(200, true, "OK", commentTypeDto);
 
         }

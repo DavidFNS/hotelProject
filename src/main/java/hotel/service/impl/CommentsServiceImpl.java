@@ -3,9 +3,9 @@ package hotel.service.impl;
 import hotel.dto.CommentsDto;
 import hotel.dto.ResponseDto;
 import hotel.entity.Comments;
-import hotel.mapper.CommentsMap;
 import hotel.repository.CommentsRepository;
 import hotel.service.CommentsService;
+import hotel.service.mapper.CommentsMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,14 +15,16 @@ import java.util.Optional;
 public class CommentsServiceImpl implements CommentsService {
 
     private final CommentsRepository commentsRepository;
+    private final CommentsMapper commentsMapper;
 
-    public CommentsServiceImpl(CommentsRepository commentsRepository){
+    public CommentsServiceImpl(CommentsRepository commentsRepository, CommentsMapper commentsMapper){
         this.commentsRepository = commentsRepository;
+        this.commentsMapper = commentsMapper;
     }
 
     @Override
     public ResponseDto addComment(CommentsDto commentsDto) {
-        commentsRepository.save(CommentsMap.parseToEntity(commentsDto));
+        commentsRepository.save(commentsMapper.toEntity(commentsDto));
         try {
             return ResponseDto.builder()
                     .code(200)
@@ -61,7 +63,7 @@ public class CommentsServiceImpl implements CommentsService {
     public ResponseDto<List<CommentsDto>> getComment() {
         List<Comments> comments = commentsRepository.findAll();
         List<CommentsDto> commentsDtos = comments.stream()
-                .map(CommentsMap::parseToDto)
+                .map(commentsMapper::toDto)
                 .toList();
         return new ResponseDto<>(200, true, "OK", commentsDtos);
     }
@@ -70,7 +72,7 @@ public class CommentsServiceImpl implements CommentsService {
     public ResponseDto<CommentsDto> findById(Integer id) {
         if (commentsRepository.existsById(id)) {
             Comments comments = (commentsRepository.findById(id)).get();
-            return new ResponseDto<>(200, true, "OK", CommentsMap.parseToDto(comments));
+            return new ResponseDto<>(200, true, "OK", commentsMapper.toDto(comments));
         }
         return new ResponseDto<>(404, false, "Not working", null);
     }
