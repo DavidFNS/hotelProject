@@ -16,12 +16,12 @@ import java.util.Optional;
 @Service
 public class UsersServiceImpl implements UserService {
 
-    @Autowired
-    private UsersMapper usersMapper;
+    private final UsersMapper usersMapper;
     private final UsersRepository usersRepository;
 
-    public UsersServiceImpl(UsersRepository usersRepository){
+    public UsersServiceImpl(UsersRepository usersRepository, UsersMapper usersMapper){
         this.usersRepository = usersRepository;
+        this.usersMapper = usersMapper;
     }
 
     @Override
