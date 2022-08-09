@@ -22,6 +22,6 @@ public class PaymentInfo {
     private String card_sender;
     private String card_receiver;
     private String name_sender;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date created_at;
 }

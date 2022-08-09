@@ -22,6 +22,6 @@ public class Comments {
     private String comment;
     private Integer status;
     private Integer id_comment_type;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date created_at;
 }

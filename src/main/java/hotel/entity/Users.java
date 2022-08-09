@@ -33,6 +33,6 @@ public class Users {
 
     private String phoneNumber;
     private Double account;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date created_at;
 }

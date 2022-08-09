@@ -25,6 +25,6 @@ public class Admins {
     private String card_number;
     private String valid_date;
     private Double balance;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date created_at;
 }
