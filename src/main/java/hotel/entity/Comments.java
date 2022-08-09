@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import java.util.Date;
 
 @Entity
@@ -17,6 +19,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class Comments {
     @Id
+    @GeneratedValue(generator = "java_comments")
+    @SequenceGenerator(name = "java_comments", sequenceName = "comments_id_seq", allocationSize = 1)
     private Integer id;
     private Integer user_id;
     private String comment;
