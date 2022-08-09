@@ -1,14 +1,14 @@
 package hotel.mapper;
 
-import hotel.dto.ServiceeDto;
-import hotel.entity.Servicee;
+import hotel.dto.ServiceDto;
+import hotel.entity.Service;
 
-public class ServiceeMap {
+public class ServiceMap {
 
-    public static ServiceeDto parseToDto(Servicee servicee){
+    public static ServiceDto parseToDto(Service servicee){
 
         if (servicee == null) return null;
-        return ServiceeDto.builder()
+        return ServiceDto.builder()
                 .id(servicee.getId())
                 .name(servicee.getName())
                 .price(servicee.getPrice())
@@ -16,10 +16,10 @@ public class ServiceeMap {
     }
 
 
-    public static Servicee parseToEntity(ServiceeDto serviceDto){
+    public static Service parseToEntity(ServiceDto serviceDto){
 
         if (serviceDto == null) return null;
-        return Servicee.builder()
+        return Service.builder()
                 .id(serviceDto.getId())
                 .name(serviceDto.getName())
                 .price(serviceDto.getPrice())

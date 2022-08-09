@@ -6,7 +6,7 @@ import hotel.service.impl.AdminsServerImpl;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("/admins")
 public class AdminsController {
     private final AdminsServerImpl adminsServer;
 

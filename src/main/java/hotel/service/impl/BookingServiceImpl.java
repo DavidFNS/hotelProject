@@ -20,11 +20,12 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public ResponseDto<BookingDto> addBooking(BookingDto bookingDto) {
-        Booking booking = BookingMap.parseToEntity(bookingDto);
-        bookingRepository.save(booking);
-
-        ResponseDto<BookingDto> responseDto = new ResponseDto(200,true,"OK",bookingDto);
-        return responseDto;
+//        Booking booking = BookingMap.parseToEntity(bookingDto);
+//        bookingRepository.save(booking);
+//
+//        ResponseDto<BookingDto> responseDto = new ResponseDto(200,true,"OK",bookingDto);
+//        return responseDto;
+        return null;
     }
 
     @Override
@@ -58,17 +59,13 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public ResponseDto<BookingDto> getBookingById(Integer id) {
-        ResponseDto<BookingDto> responseDto;
         if (bookingRepository.existsById(id)){
             Booking booking = (bookingRepository.findById(id)).get();
             BookingDto bookingDto = BookingMap.parseToDto(booking);
-
-            responseDto = new ResponseDto<>(200,true,"OK",bookingDto);
-            return responseDto;
+            return new ResponseDto<>(200,true,"OK", bookingDto);
         }
-        responseDto = new ResponseDto<>(404,false,"Not found", null);
 
-        return responseDto;
+        return new ResponseDto<>(404,false,"Not found", null);
     }
 
     @Override

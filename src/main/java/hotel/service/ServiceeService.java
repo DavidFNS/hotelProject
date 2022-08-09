@@ -1,16 +1,16 @@
 package hotel.service;
 
 import hotel.dto.ResponseDto;
-import hotel.dto.ServiceeDto;
+import hotel.dto.ServiceDto;
 
 import java.util.List;
 
 public interface ServiceeService {
 
-    ResponseDto<List<ServiceeDto>> getAllService();
-    ResponseDto<ServiceeDto> getServiceById(Integer id);
-    ResponseDto addService(ServiceeDto serviceDto);
-    ResponseDto updateService(ServiceeDto serviceDto);
+    ResponseDto<List<ServiceDto>> getAllService();
+    ResponseDto<ServiceDto> getServiceById(Integer id);
+    ResponseDto addService(ServiceDto serviceDto);
+    ResponseDto updateService(ServiceDto serviceDto);
     ResponseDto deleteService(Integer id);
 
 }

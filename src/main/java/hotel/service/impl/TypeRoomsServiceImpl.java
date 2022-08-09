@@ -2,11 +2,8 @@ package hotel.service.impl;
 
 import hotel.dto.BookingDto;
 import hotel.dto.ResponseDto;
-import hotel.dto.ServiceeDto;
 import hotel.dto.TypeRoomsDto;
-import hotel.entity.Servicee;
 import hotel.entity.TypeRooms;
-import hotel.mapper.ServiceeMap;
 import hotel.mapper.TypeRoomsMap;
 import hotel.repository.TypeRoomsRepository;
 import hotel.service.TypeRoomsService;

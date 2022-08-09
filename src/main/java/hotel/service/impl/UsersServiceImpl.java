@@ -7,6 +7,7 @@ import hotel.mapper.UsersMap;
 import hotel.repository.UsersRepository;
 import hotel.service.UserService;
 import hotel.service.mapper.UsersMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsersServiceImpl implements UserService {
 
-    @Autowired
-    private UsersMapper usersMapper;
+
+public class UsersServiceImpl implements UserService {
     private final UsersRepository usersRepository;
 
     public UsersServiceImpl(UsersRepository usersRepository){
@@ -26,21 +26,21 @@ public class UsersServiceImpl implements UserService {
 
     @Override
     public ResponseDto addUser(UsersDto usersDto) {
-        Users user = usersMapper.toEntity(usersDto);
-        usersRepository.save(user);
-        try {
-            return ResponseDto.builder()
-                    .code(200)
-                    .success(true)
-                    .message("OK")
-                    .build();
-        } catch (Exception i){
-            return ResponseDto.builder()
-                    .code(404)
-                    .success(false)
-                    .message("Not working")
-                    .build();
-        }
+        return null;
+//        usersRepository.save(user);
+//        try {
+//            return ResponseDto.builder()
+//                    .code(200)
+//                    .success(true)
+//                    .message("OK")
+//                    .build();
+//        } catch (Exception i){
+//            return ResponseDto.builder()
+//                    .code(404)
+//                    .success(false)
+//                    .message("Not working")
+//                    .build();
+////        }
     }
 
     @Override

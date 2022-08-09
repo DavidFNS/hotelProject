@@ -6,6 +6,7 @@ import hotel.entity.Comments;
 import hotel.mapper.CommentsMap;
 import hotel.repository.CommentsRepository;
 import hotel.service.CommentsService;
+import hotel.service.mapper.CommentMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,15 +15,17 @@ import java.util.Optional;
 @Service
 public class CommentsServiceImpl implements CommentsService {
 
+    private final CommentMapper commentMapper;
     private final CommentsRepository commentsRepository;
 
-    public CommentsServiceImpl(CommentsRepository commentsRepository){
+    public CommentsServiceImpl(CommentMapper commentMapper, CommentsRepository commentsRepository){
+        this.commentMapper = commentMapper;
         this.commentsRepository = commentsRepository;
     }
 
     @Override
     public ResponseDto addComment(CommentsDto commentsDto) {
-        commentsRepository.save(CommentsMap.parseToEntity(commentsDto));
+        commentsRepository.save(commentMapper.toEntity(commentsDto));
         try {
             return ResponseDto.builder()
                     .code(200)
@@ -61,7 +64,7 @@ public class CommentsServiceImpl implements CommentsService {
     public ResponseDto<List<CommentsDto>> getComment() {
         List<Comments> comments = commentsRepository.findAll();
         List<CommentsDto> commentsDtos = comments.stream()
-                .map(CommentsMap::parseToDto)
+                .map(commentMapper::toDto)
                 .toList();
         return new ResponseDto<>(200, true, "OK", commentsDtos);
     }
@@ -70,7 +73,7 @@ public class CommentsServiceImpl implements CommentsService {
     public ResponseDto<CommentsDto> findById(Integer id) {
         if (commentsRepository.existsById(id)) {
             Comments comments = (commentsRepository.findById(id)).get();
-            return new ResponseDto<>(200, true, "OK", CommentsMap.parseToDto(comments));
+            return new ResponseDto<>(200, true, "OK", commentMapper.toDto(comments));
         }
         return new ResponseDto<>(404, false, "Not working", null);
     }

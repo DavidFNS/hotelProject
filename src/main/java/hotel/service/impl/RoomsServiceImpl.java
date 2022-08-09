@@ -3,32 +3,29 @@ package hotel.service.impl;
 import hotel.dto.BookingDto;
 import hotel.dto.ResponseDto;
 import hotel.dto.RoomsDto;
-import hotel.dto.ServiceeDto;
-import hotel.entity.RoomServices;
 import hotel.entity.Rooms;
-import hotel.entity.Servicee;
-import hotel.mapper.RoomServicesMap;
 import hotel.mapper.RoomsMap;
-import hotel.mapper.ServiceeMap;
-import hotel.repository.RoomServicesRepository;
 import hotel.repository.RoomsRepository;
 import hotel.service.RoomsService;
-import lombok.RequiredArgsConstructor;
+import hotel.service.mapper.RoomMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class RoomsServiceImpl implements RoomsService{
-
+    private final RoomMapper roomMapper;
     private final RoomsRepository roomsRepository;
+
+    public RoomsServiceImpl(RoomMapper roomMapper, RoomsRepository roomsRepository) {
+        this.roomMapper = roomMapper;
+        this.roomsRepository = roomsRepository;
+    }
 
     @Override
     public ResponseDto addRoom(RoomsDto roomsDto) {
-        Rooms roomServices = RoomsMap.parseToEntity(roomsDto);
-        roomsRepository.save(roomServices);
-
+        Rooms rooms = roomMapper.toEntity(roomsDto);
+        roomsRepository.save(rooms);
         ResponseDto<BookingDto> responseDto = new ResponseDto(200,true,"OK",roomsDto);
         return responseDto;
 

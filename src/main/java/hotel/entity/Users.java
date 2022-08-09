@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -18,8 +15,9 @@ import java.util.Date;
 @AllArgsConstructor
 
 public class Users {
-
     @Id
+    @GeneratedValue(generator = "java_booking_seq")
+    @SequenceGenerator(name = "java_booking_seq", sequenceName = "user_id_seq", allocationSize = 1)
     private Integer id;
     private String firstname;
 

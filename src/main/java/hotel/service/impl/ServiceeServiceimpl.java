@@ -2,31 +2,28 @@ package hotel.service.impl;
 
 import hotel.dto.BookingDto;
 import hotel.dto.ResponseDto;
-import hotel.dto.ServiceeDto;
-import hotel.entity.Booking;
-import hotel.entity.Servicee;
-import hotel.mapper.BookingMap;
-import hotel.mapper.ServiceeMap;
+import hotel.dto.ServiceDto;
+import hotel.entity.Service;
+import hotel.mapper.ServiceMap;
 import hotel.repository.ServiceRepository;
 import hotel.service.ServiceeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@org.springframework.stereotype.Service
 @RequiredArgsConstructor
 public class ServiceeServiceimpl implements ServiceeService {
 
     private final ServiceRepository serviceRepository;
 
     @Override
-    public ResponseDto<List<ServiceeDto>> getAllService() {
-        List<Servicee> serviceeList = serviceRepository.findAll();
+    public ResponseDto<List<ServiceDto>> getAllService() {
+        List<Service> serviceeList = serviceRepository.findAll();
 
-        List<ServiceeDto> serviceDtoList = serviceeList.stream()
+        List<ServiceDto> serviceDtoList = serviceeList.stream()
                 .map(b -> {
-                    return ServiceeDto.builder()
+                    return ServiceDto.builder()
                             .id(b.getId())
                             .name(b.getName())
                             .price(b.getPrice())
@@ -34,7 +31,7 @@ public class ServiceeServiceimpl implements ServiceeService {
                     }
                 ).toList();
 
-        ResponseDto<List<ServiceeDto>> responseDto = new ResponseDto<>(200,
+        ResponseDto<List<ServiceDto>> responseDto = new ResponseDto<>(200,
                 true,
                 "OK",
                 serviceDtoList);
@@ -43,11 +40,11 @@ public class ServiceeServiceimpl implements ServiceeService {
     }
 
     @Override
-    public ResponseDto<ServiceeDto> getServiceById(Integer id) {
-        ResponseDto<ServiceeDto> responseDto;
+    public ResponseDto<ServiceDto> getServiceById(Integer id) {
+        ResponseDto<ServiceDto> responseDto;
         if (serviceRepository.existsById(id)){
-            Servicee servicee = (serviceRepository.findById(id)).get();
-            ServiceeDto serviceDto = ServiceeMap.parseToDto(servicee);
+            Service servicee = (serviceRepository.findById(id)).get();
+            ServiceDto serviceDto = ServiceMap.parseToDto(servicee);
 
             responseDto = new ResponseDto<>(200,true,"OK",serviceDto);
             return responseDto;
@@ -59,8 +56,8 @@ public class ServiceeServiceimpl implements ServiceeService {
     }
 
     @Override
-    public ResponseDto addService(ServiceeDto serviceDto) {
-        Servicee servicee = ServiceeMap.parseToEntity(serviceDto);
+    public ResponseDto addService(ServiceDto serviceDto) {
+        Service servicee = ServiceMap.parseToEntity(serviceDto);
         serviceRepository.save(servicee);
 
         ResponseDto<BookingDto> responseDto = new ResponseDto(200,true,"OK",serviceDto);
@@ -69,9 +66,9 @@ public class ServiceeServiceimpl implements ServiceeService {
     }
 
     @Override
-    public ResponseDto updateService(ServiceeDto serviceDto) {
+    public ResponseDto updateService(ServiceDto serviceDto) {
         if(serviceRepository.existsById(serviceDto.getId())){
-            Servicee servicee = ServiceeMap.parseToEntity(serviceDto);
+            Service servicee = ServiceMap.parseToEntity(serviceDto);
             serviceRepository.save(servicee);
 
             return ResponseDto.builder().code(200).success(true).message("OK").build();

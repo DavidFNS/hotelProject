@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("typerooms")
+@RequestMapping("/typerooms")
 @RequiredArgsConstructor
 public class TypeRoomsController {
 
