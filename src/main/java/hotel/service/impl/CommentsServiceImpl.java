@@ -3,7 +3,6 @@ package hotel.service.impl;
 import hotel.dto.CommentsDto;
 import hotel.dto.ResponseDto;
 import hotel.entity.Comments;
-import hotel.mapper.CommentsMap;
 import hotel.repository.CommentsRepository;
 import hotel.service.CommentsService;
 import hotel.service.mapper.CommentMapper;

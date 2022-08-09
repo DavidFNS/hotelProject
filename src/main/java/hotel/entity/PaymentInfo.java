@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,5 +22,6 @@ public class PaymentInfo {
     private String card_sender;
     private String card_receiver;
     private String name_sender;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date created_at;
 }

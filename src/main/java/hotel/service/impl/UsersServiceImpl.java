@@ -24,6 +24,21 @@ public class UsersServiceImpl implements UserService {
     }
 
     @Override
+    public ResponseDto<List<UsersDto>> getUsersWhoOrderedBook() {
+        List<Users> users = usersRepository.getUsersWhoOrderedRoom();
+        List<UsersDto> usersDto = users.stream()
+                .map(usersMapper::toDto)
+                .toList();
+        if (usersDto.isEmpty()){
+            return ResponseDto.<List<UsersDto>>builder()
+                    .code(404).success(false).message("NOT FOUND!!!!!!!!!!!!!!").data(null).build();
+        }
+
+        return ResponseDto.<List<UsersDto>>builder()
+                .code(200).success(true).message("OK").data(usersDto).build();
+    }
+
+    @Override
     public ResponseDto addUser(UsersDto usersDto) {
         Users user = usersMapper.toEntity(usersDto);
         usersRepository.save(user);
@@ -75,6 +90,7 @@ public class UsersServiceImpl implements UserService {
                     .message("OK")
                     .build();
         }
+
         return ResponseDto.builder()
                 .code(404)
                 .success(false)
@@ -85,6 +101,7 @@ public class UsersServiceImpl implements UserService {
     @Override
     public ResponseDto<List<UsersDto>> getAllUsers() {
         List<Users> users = usersRepository.findAll();
+
         List<UsersDto> usersDto = users.stream()
                 .map(u -> UsersDto.builder()
                         .id(u.getId())
@@ -98,11 +115,7 @@ public class UsersServiceImpl implements UserService {
                         .created_at(u.getCreated_at())
                         .build())
                 .toList();
-        try {
-            return new ResponseDto<>(200, true, "OK", usersDto);
-        } catch (Exception i){
-            return new ResponseDto<>(404, false, "Not working", null);
-        }
+        return new ResponseDto<>(200, true, "OK", usersDto);
     }
 
     @Override

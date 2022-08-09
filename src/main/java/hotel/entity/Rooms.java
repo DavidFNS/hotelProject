@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,7 +16,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Table(name = "rooms")
 public class Rooms {
-
     @Id
     @Column(name = "id")
     private Integer id;
@@ -33,6 +33,6 @@ public class Rooms {
     private Double price;
 
     @Column(name = "created_at")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date createdAt;
-
 }

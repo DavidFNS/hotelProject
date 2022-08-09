@@ -4,7 +4,6 @@ import hotel.dto.BookingDto;
 import hotel.dto.ResponseDto;
 import hotel.dto.RoomsDto;
 import hotel.entity.Rooms;
-import hotel.mapper.RoomsMap;
 import hotel.repository.RoomsRepository;
 import hotel.service.RoomsService;
 import hotel.service.mapper.RoomMapper;

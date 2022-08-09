@@ -6,6 +6,8 @@ import hotel.dto.UsersDto;
 import java.util.List;
 
 public interface UserService {
+    ResponseDto<List<UsersDto>> getUsersWhoOrderedBook();
+
     ResponseDto addUser(UsersDto usersDto);
 
     ResponseDto updateUser(UsersDto usersDto);

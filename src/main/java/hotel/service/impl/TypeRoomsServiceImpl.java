@@ -4,7 +4,6 @@ import hotel.dto.BookingDto;
 import hotel.dto.ResponseDto;
 import hotel.dto.TypeRoomsDto;
 import hotel.entity.TypeRooms;
-import hotel.mapper.TypeRoomsMap;
 import hotel.repository.TypeRoomsRepository;
 import hotel.service.TypeRoomsService;
 import lombok.RequiredArgsConstructor;
