@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class UsersServiceImpl implements UserService {
 
@@ -25,10 +27,17 @@ public class UsersServiceImpl implements UserService {
 
     @Override
     public ResponseDto addUser(UsersDto usersDto) {
-        Users user = usersMapper.toEntity(usersDto);
-        usersRepository.save(user);
         try {
-            return ResponseDto.builder()
+            List<Users> users = usersRepository.query_q();
+            for(int i=0; i<users.size(); i++){
+                if(users.get(i).getEmail().equals(usersDto.getEmail())){
+                    return ResponseDto.builder().code(200).success(false).message("Bunday email mavjud!").build();
+                }
+            }
+
+            Users user = usersMapper.toEntity(usersDto);
+            usersRepository.save(user);
+                return ResponseDto.builder()
                     .code(200)
                     .success(true)
                     .message("OK")
@@ -86,17 +95,7 @@ public class UsersServiceImpl implements UserService {
     public ResponseDto<List<UsersDto>> getAllUsers() {
         List<Users> users = usersRepository.findAll();
         List<UsersDto> usersDto = users.stream()
-                .map(u -> UsersDto.builder()
-                        .id(u.getId())
-                        .firstName(u.getFirstname())
-                        .lastName(u.getLastname())
-                        .age(u.getAge())
-                        .phoneNumber(u.getPhoneNumber())
-                        .email(u.getEmail())
-                        .password(u.getPassword())
-                        .account(u.getAccount())
-                        .created_at(u.getCreated_at())
-                        .build())
+                .map(usersMapper::toDto)
                 .toList();
         try {
             return new ResponseDto<>(200, true, "OK", usersDto);

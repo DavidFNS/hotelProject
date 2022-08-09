@@ -16,8 +16,8 @@ import java.util.Date;
 
 public class Users {
     @Id
-    @GeneratedValue(generator = "java_booking_seq")
-    @SequenceGenerator(name = "java_booking_seq", sequenceName = "user_id_seq", allocationSize = 1)
+    @GeneratedValue(generator = "java_user_seq")
+    @SequenceGenerator(name = "java_user_seq", sequenceName = "user_id_seq", allocationSize = 1)
     private Integer id;
     private String firstname;
 

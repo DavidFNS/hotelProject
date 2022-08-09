@@ -2,6 +2,7 @@ package hotel.service.impl;
 
 import hotel.dto.CommentTypeDto;
 import hotel.dto.ResponseDto;
+import hotel.dto.UsersDto;
 import hotel.entity.CommentType;
 import hotel.repository.CommentTypeRepository;
 import hotel.service.CommentTypeService;
