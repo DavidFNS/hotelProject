@@ -3,11 +3,9 @@ package hotel.service.impl;
 import hotel.dto.ResponseDto;
 import hotel.dto.UsersDto;
 import hotel.entity.Users;
-import hotel.mapper.UsersMap;
 import hotel.repository.UsersRepository;
 import hotel.service.UserService;
 import hotel.service.mapper.UsersMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,32 +13,33 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-
-
 public class UsersServiceImpl implements UserService {
+
+    private final UsersMapper usersMapper;
     private final UsersRepository usersRepository;
 
-    public UsersServiceImpl(UsersRepository usersRepository){
+    public UsersServiceImpl(UsersRepository usersRepository, UsersMapper usersMapper){
         this.usersRepository = usersRepository;
+        this.usersMapper = usersMapper;
     }
 
     @Override
     public ResponseDto addUser(UsersDto usersDto) {
-        return null;
-//        usersRepository.save(user);
-//        try {
-//            return ResponseDto.builder()
-//                    .code(200)
-//                    .success(true)
-//                    .message("OK")
-//                    .build();
-//        } catch (Exception i){
-//            return ResponseDto.builder()
-//                    .code(404)
-//                    .success(false)
-//                    .message("Not working")
-//                    .build();
-////        }
+        Users user = usersMapper.toEntity(usersDto);
+        usersRepository.save(user);
+        try {
+            return ResponseDto.builder()
+                    .code(200)
+                    .success(true)
+                    .message("OK")
+                    .build();
+        } catch (Exception i){
+            return ResponseDto.builder()
+                    .code(404)
+                    .success(false)
+                    .message("Not working")
+                    .build();
+        }
     }
 
     @Override
@@ -109,6 +108,6 @@ public class UsersServiceImpl implements UserService {
     @Override
     public ResponseDto<UsersDto> findById(Integer id) {
         Optional<Users> optional = usersRepository.findById(id);
-        return optional.map(users -> new ResponseDto<>(200, true, "OK", UsersMap.parseToDto(users))).orElseGet(() -> new ResponseDto<>(404, false, "Not working", null));
+        return optional.map(users -> new ResponseDto<>(200, true, "OK", usersMapper.toDto(users))).orElseGet(() -> new ResponseDto<>(404, false, "Not working", null));
     }
 }
