@@ -43,7 +43,7 @@ public class UsersServiceImpl implements UserService {
     @Override
     public ResponseDto addUser(UsersDto usersDto) {
         try {
-            List<Users> users = usersRepository.query_q();
+            List<Users> users = usersRepository.findAll();
             for(int i=0; i<users.size(); i++){
                 if(users.get(i).getEmail().equals(usersDto.getEmail())){
                     return ResponseDto.builder().code(200).success(false).message("Bunday email mavjud!").build();

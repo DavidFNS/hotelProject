@@ -6,6 +6,7 @@ import hotel.entity.Booking;
 import hotel.repository.BookingRepository;
 import hotel.service.BookingService;
 import hotel.service.mapper.BookingMapper;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -72,7 +73,6 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public ResponseDto<List<BookingDto>> getAllBooking() {
         List<Booking> bookingList = bookingRepository.findAll();
-
         List<BookingDto> bookingDtoList = bookingList.stream()
                 .map(mapper::toDto).toList();
 
