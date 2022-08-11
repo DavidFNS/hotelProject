@@ -17,6 +17,8 @@ import java.util.Date;
 public class Rooms {
 
     @Id
+    @GeneratedValue(generator = "rooms_seq")
+    @SequenceGenerator(name = "rooms_seq", sequenceName = "rooms_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 

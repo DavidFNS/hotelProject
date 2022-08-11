@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -19,6 +16,8 @@ import javax.persistence.Table;
 public class Service {
 
     @Id
+    @GeneratedValue(generator = "service_seq")
+    @SequenceGenerator(name = "service_seq", sequenceName = "service_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 
