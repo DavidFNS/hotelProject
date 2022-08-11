@@ -15,13 +15,20 @@ public class UsersController {
     public UsersController(UsersServiceImpl usersService){
         this.usersService = usersService;
     }
+
+    @GetMapping("/orderedUsers")
+    public ResponseDto<List<UsersDto>> getUsersWhoOrderedRoom(){
+        return usersService.getUsersWhoOrderedBook();
+    }
+
+
     @GetMapping
     public ResponseDto<List<UsersDto>> getAllUsers(){
         return usersService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public ResponseDto<UsersDto> findById(@PathVariable Integer id){
+    public ResponseDto<UsersDto> findById(@PathVariable Integer id) {
         return usersService.findById(id);
     }
 

@@ -3,7 +3,6 @@ package hotel.service.impl;
 import hotel.dto.AdminsDto;
 import hotel.dto.ResponseDto;
 import hotel.entity.Admins;
-import hotel.mapper.AdminMap;
 import hotel.repository.AdminsRepository;
 import hotel.service.AdminsService;
 import org.springframework.stereotype.Service;

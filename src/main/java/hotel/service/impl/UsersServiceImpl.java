@@ -26,9 +26,24 @@ public class UsersServiceImpl implements UserService {
     }
 
     @Override
+    public ResponseDto<List<UsersDto>> getUsersWhoOrderedBook() {
+        List<Users> users = usersRepository.getUsersWhoOrderedRoom();
+        List<UsersDto> usersDto = users.stream()
+                .map(usersMapper::toDto)
+                .toList();
+        if (usersDto.isEmpty()){
+            return ResponseDto.<List<UsersDto>>builder()
+                    .code(404).success(false).message("NOT FOUND!!!!!!!!!!!!!!").data(null).build();
+        }
+
+        return ResponseDto.<List<UsersDto>>builder()
+                .code(200).success(true).message("OK").data(usersDto).build();
+    }
+
+    @Override
     public ResponseDto addUser(UsersDto usersDto) {
         try {
-            List<Users> users = usersRepository.query_q();
+            List<Users> users = usersRepository.findAll();
             for(int i=0; i<users.size(); i++){
                 if(users.get(i).getEmail().equals(usersDto.getEmail())){
                     return ResponseDto.builder().code(200).success(false).message("Bunday email mavjud!").build();
@@ -84,6 +99,7 @@ public class UsersServiceImpl implements UserService {
                     .message("OK")
                     .build();
         }
+
         return ResponseDto.builder()
                 .code(404)
                 .success(false)
@@ -94,14 +110,11 @@ public class UsersServiceImpl implements UserService {
     @Override
     public ResponseDto<List<UsersDto>> getAllUsers() {
         List<Users> users = usersRepository.findAll();
+
         List<UsersDto> usersDto = users.stream()
                 .map(usersMapper::toDto)
                 .toList();
-        try {
-            return new ResponseDto<>(200, true, "OK", usersDto);
-        } catch (Exception i){
-            return new ResponseDto<>(404, false, "Not working", null);
-        }
+        return new ResponseDto<>(200, true, "OK", usersDto);
     }
 
     @Override

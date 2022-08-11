@@ -3,6 +3,7 @@ package hotel.dto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -25,7 +26,7 @@ public class UsersDto {
     private String phoneNumber;
 
     private Double account;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date created_at;
 
 }

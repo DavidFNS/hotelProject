@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,5 +26,6 @@ public class Comments {
     private String comment;
     private Integer status;
     private Integer id_comment_type;
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date created_at;
 }

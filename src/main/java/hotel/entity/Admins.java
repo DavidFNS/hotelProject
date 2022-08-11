@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,5 +25,6 @@ public class Admins {
     private String card_number;
     private String valid_date;
     private Double balance;
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date created_at;
 }

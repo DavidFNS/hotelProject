@@ -3,7 +3,6 @@ package hotel.service.impl;
 import hotel.dto.PaymentInfoDto;
 import hotel.dto.ResponseDto;
 import hotel.entity.PaymentInfo;
-import hotel.mapper.PaymentInfoMap;
 import hotel.repository.PaymentInfoRepository;
 import hotel.service.PaymentInfoService;
 import org.springframework.stereotype.Service;

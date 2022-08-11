@@ -2,7 +2,7 @@ package hotel.controller;
 
 import hotel.dto.ResponseDto;
 import hotel.dto.ServiceDto;
-import hotel.service.impl.ServiceeServiceimpl;
+import hotel.service.impl.ServiceServiceimpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ServiceController {
 
-    private final ServiceeServiceimpl serviceeServiceimpl;
+    private final ServiceServiceimpl serviceeServiceimpl;
 
     @GetMapping
     public ResponseDto<List<ServiceDto>> getAllService(){

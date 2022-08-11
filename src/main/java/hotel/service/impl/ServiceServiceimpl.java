@@ -4,19 +4,18 @@ import hotel.dto.BookingDto;
 import hotel.dto.ResponseDto;
 import hotel.dto.ServiceDto;
 import hotel.entity.Service;
-import hotel.mapper.ServiceMap;
 import hotel.repository.ServiceRepository;
 import hotel.service.ServiceeService;
+import hotel.service.mapper.ServiceMapper;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @org.springframework.stereotype.Service
 @RequiredArgsConstructor
-public class ServiceeServiceimpl implements ServiceeService {
-
+public class ServiceServiceimpl implements ServiceeService {
     private final ServiceRepository serviceRepository;
-
+    private final ServiceMapper
     @Override
     public ResponseDto<List<ServiceDto>> getAllService() {
         List<Service> serviceeList = serviceRepository.findAll();
