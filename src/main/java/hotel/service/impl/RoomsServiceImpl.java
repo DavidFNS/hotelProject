@@ -33,7 +33,7 @@ public class RoomsServiceImpl implements RoomsService{
     @Override
     public ResponseDto updateRoom(RoomsDto roomsDto) {
         if(roomsRepository.existsById(roomsDto.getId())){
-            Rooms rooms = RoomsMap.parseToEntity(roomsDto);
+            Rooms rooms = roomMapper.toEntity(roomsDto);
             roomsRepository.save(rooms);
 
             return ResponseDto.builder().code(200).success(true).message("OK").build();
@@ -66,7 +66,7 @@ public class RoomsServiceImpl implements RoomsService{
         ResponseDto<RoomsDto> responseDto;
         if (roomsRepository.existsById(id)){
             Rooms rooms = (roomsRepository.findById(id)).get();
-            RoomsDto roomsDto = RoomsMap.parseToDto(rooms);
+            RoomsDto roomsDto = roomMapper.toDto(rooms);
 
             responseDto = new ResponseDto<>(200,true,"OK",roomsDto);
             return responseDto;

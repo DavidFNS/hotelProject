@@ -24,7 +24,7 @@ public class RoomServiceServiceImpl implements RoomServicesService {
 
     @Override
     public ResponseDto addRoomService(RoomServicesDto roomServicesDto) {
-        RoomServices roomServices = RoomServicesMap.parseToEntity(roomServicesDto);
+        RoomServices roomServices = mapper.toEntity(roomServicesDto);
         roomServicesRepository.save(roomServices);
 
         ResponseDto<BookingDto> responseDto = new ResponseDto(200,true,"OK",roomServices);
@@ -35,7 +35,7 @@ public class RoomServiceServiceImpl implements RoomServicesService {
     @Override
     public ResponseDto updateRoomService(RoomServicesDto roomServicesDto) {
         if(roomServicesRepository.existsById(roomServicesDto.getId())){
-            RoomServices roomServices = RoomServicesMap.parseToEntity(roomServicesDto);
+            RoomServices roomServices = mapper.toEntity(roomServicesDto);
             roomServicesRepository.save(roomServices);
 
             return ResponseDto.builder().code(200).success(true).message("OK").build();
@@ -68,7 +68,7 @@ public class RoomServiceServiceImpl implements RoomServicesService {
         ResponseDto<RoomServicesDto> responseDto;
         if (roomServicesRepository.existsById(id)){
             RoomServices roomServices = (roomServicesRepository.findById(id)).get();
-            RoomServicesDto roomServicesDto = RoomServicesMap.parseToDto(roomServices);
+            RoomServicesDto roomServicesDto = mapper.toDto(roomServices);
 
             responseDto = new ResponseDto<>(200,true,"OK",roomServicesDto);
             return responseDto;

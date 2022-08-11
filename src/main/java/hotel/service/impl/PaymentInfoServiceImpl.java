@@ -5,23 +5,24 @@ import hotel.dto.ResponseDto;
 import hotel.entity.PaymentInfo;
 import hotel.repository.PaymentInfoRepository;
 import hotel.service.PaymentInfoService;
+import hotel.service.mapper.PaymentInfoMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PaymentInfoServiceImpl implements PaymentInfoService {
 
     private final PaymentInfoRepository paymentInfoRepository;
+    private final PaymentInfoMapper paymentInfoMapper;
 
-    public PaymentInfoServiceImpl(PaymentInfoRepository paymentInfoRepository) {
-        this.paymentInfoRepository = paymentInfoRepository;
-    }
 
     @Override
     public ResponseDto addPaymentInfo(PaymentInfoDto paymentInfoDto) {
-        paymentInfoRepository.save(PaymentInfoMap.parsToEntity(paymentInfoDto));
+        paymentInfoRepository.save(paymentInfoMapper.toEntity(paymentInfoDto));
         try {
             return ResponseDto.builder()
                     .code(200)
@@ -40,7 +41,7 @@ public class PaymentInfoServiceImpl implements PaymentInfoService {
     @Override
     public ResponseDto updatePaymentInfo(PaymentInfoDto paymentInfoDto){
         if(paymentInfoRepository.existsById(paymentInfoDto.getId())){
-            PaymentInfo paymentInfo = PaymentInfoMap.parsToEntity(paymentInfoDto);
+            PaymentInfo paymentInfo = paymentInfoMapper.toEntity(paymentInfoDto);
             paymentInfoRepository.save(paymentInfo);
 
             return ResponseDto.builder().code(200).success(true).message("OK").build();
@@ -70,7 +71,7 @@ public class PaymentInfoServiceImpl implements PaymentInfoService {
     public ResponseDto<List<PaymentInfoDto>> getPaymentInfo() {
         List<PaymentInfo> paymentInfos = paymentInfoRepository.findAll();
         List<PaymentInfoDto> paymentInfoDtos = paymentInfos.stream()
-                .map(PaymentInfoMap::parsToDto)
+                .map(paymentInfoMapper::toDto)
                 .toList();
         return new ResponseDto<>(200, true, "OK", paymentInfoDtos);
     }
@@ -79,7 +80,7 @@ public class PaymentInfoServiceImpl implements PaymentInfoService {
     public ResponseDto<PaymentInfoDto> findById(Integer id) {
         if (paymentInfoRepository.existsById(id)) {
             PaymentInfo paymentInfo = (paymentInfoRepository.findById(id)).get();
-            return new ResponseDto<>(200, true, "OK", PaymentInfoMap.parsToDto(paymentInfo));
+            return new ResponseDto<>(200, true, "OK", paymentInfoMapper.toDto(paymentInfo));
         }
         return new ResponseDto<>(404, false, "Not working", null);
     }

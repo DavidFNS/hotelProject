@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ServiceServiceimpl implements ServiceeService {
     private final ServiceRepository serviceRepository;
-    private final ServiceMapper
+    private final ServiceMapper serviceMapper;
     @Override
     public ResponseDto<List<ServiceDto>> getAllService() {
         List<Service> serviceeList = serviceRepository.findAll();
@@ -43,7 +43,7 @@ public class ServiceServiceimpl implements ServiceeService {
         ResponseDto<ServiceDto> responseDto;
         if (serviceRepository.existsById(id)){
             Service servicee = (serviceRepository.findById(id)).get();
-            ServiceDto serviceDto = ServiceMap.parseToDto(servicee);
+            ServiceDto serviceDto = serviceMapper.toDto(servicee);
 
             responseDto = new ResponseDto<>(200,true,"OK",serviceDto);
             return responseDto;
@@ -56,7 +56,7 @@ public class ServiceServiceimpl implements ServiceeService {
 
     @Override
     public ResponseDto addService(ServiceDto serviceDto) {
-        Service servicee = ServiceMap.parseToEntity(serviceDto);
+        Service servicee = serviceMapper.toEntity(serviceDto);
         serviceRepository.save(servicee);
 
         ResponseDto<BookingDto> responseDto = new ResponseDto(200,true,"OK",serviceDto);
@@ -67,7 +67,7 @@ public class ServiceServiceimpl implements ServiceeService {
     @Override
     public ResponseDto updateService(ServiceDto serviceDto) {
         if(serviceRepository.existsById(serviceDto.getId())){
-            Service servicee = ServiceMap.parseToEntity(serviceDto);
+            Service servicee = serviceMapper.toEntity(serviceDto);
             serviceRepository.save(servicee);
 
             return ResponseDto.builder().code(200).success(true).message("OK").build();

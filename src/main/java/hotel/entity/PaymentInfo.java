@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -17,11 +15,13 @@ import java.util.Date;
 @AllArgsConstructor
 public class PaymentInfo {
     @Id
+    @GeneratedValue(generator = "payment_info_seq")
+    @SequenceGenerator(name = "payment_info_seq", sequenceName = "payment_info_id_seq", allocationSize = 1)
+    @Column(name = "id")
     private Integer id;
     private Integer user_id;
     private String card_sender;
     private String card_receiver;
     private String name_sender;
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date created_at;
 }
