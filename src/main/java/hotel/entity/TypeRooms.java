@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,4 +24,7 @@ public class TypeRooms {
 
     @Column(name = "type_name")
     private String name;
+
+    @OneToMany(mappedBy = "typeRooms")
+    private List<Rooms> roomsList;
 }

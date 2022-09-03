@@ -5,7 +5,7 @@ import hotel.dto.ResponseDto;
 import hotel.entity.Admins;
 import hotel.repository.AdminsRepository;
 import hotel.service.AdminsService;
-import hotel.service.mapper.AdminsMapper;
+import hotel.service.mapper.AdminMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class AdminsServerImpl implements AdminsService {
 
     private final AdminsRepository adminsRepository;
-    private final AdminsMapper adminsMapper;
+    private final AdminMapper adminsMapper;
 
 
     @Override

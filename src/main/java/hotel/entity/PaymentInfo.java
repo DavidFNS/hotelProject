@@ -19,8 +19,10 @@ public class PaymentInfo {
     @SequenceGenerator(name = "payment_info_seq", sequenceName = "payment_info_id_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
-    private Integer user_id;
+    @ManyToOne
+    private Users user;
     private String card_sender;
+
     private String card_receiver;
     private String name_sender;
     private Date created_at;

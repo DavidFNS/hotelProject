@@ -6,7 +6,6 @@ import hotel.entity.Booking;
 import hotel.repository.BookingRepository;
 import hotel.service.BookingService;
 import hotel.service.mapper.BookingMapper;
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,15 +14,14 @@ import java.util.List;
 @Service
 public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
-    private final BookingMapper mapper;
-    public BookingServiceImpl(BookingRepository bookingRepository, BookingMapper mapper) {
+
+    public BookingServiceImpl(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
-        this.mapper = mapper;
     }
 
     @Override
     public ResponseDto<BookingDto> addBooking(BookingDto bookingDto) {
-        Booking booking = mapper.toEntity(bookingDto);
+        Booking booking = BookingMapper.toEntity(bookingDto);
         bookingRepository.save(booking);
 
         ResponseDto<BookingDto> responseDto = new ResponseDto(200,true,"OK",bookingDto);
@@ -33,7 +31,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public ResponseDto updateBooking(BookingDto bookingDto) {
         if(bookingRepository.existsById(bookingDto.getId())){
-            Booking booking = mapper.toEntity(bookingDto);
+            Booking booking = BookingMapper.toEntity(bookingDto);
             bookingRepository.save(booking);
 
             return ResponseDto.builder().code(200).success(true).message("OK").build();
@@ -63,7 +61,7 @@ public class BookingServiceImpl implements BookingService {
     public ResponseDto<BookingDto> getBookingById(Integer id) {
         if (bookingRepository.existsById(id)){
             Booking booking = (bookingRepository.findById(id)).get();
-            BookingDto bookingDto = mapper.toDto(booking);
+            BookingDto bookingDto = BookingMapper.toDto(booking);
             return new ResponseDto<>(200,true,"OK", bookingDto);
         }
 
@@ -74,7 +72,7 @@ public class BookingServiceImpl implements BookingService {
     public ResponseDto<List<BookingDto>> getAllBooking() {
         List<Booking> bookingList = bookingRepository.findAll();
         List<BookingDto> bookingDtoList = bookingList.stream()
-                .map(mapper::toDto).toList();
+                .map(BookingMapper::toDto).toList();
 
         ResponseDto<List<BookingDto>> responseDto = new ResponseDto<>(200,true,"OK",
                 bookingDtoList);

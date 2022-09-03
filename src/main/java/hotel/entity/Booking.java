@@ -8,7 +8,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
+
 
 @Entity
 @Builder
@@ -27,10 +28,14 @@ public class Booking {
             @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")
     })
     private Integer id;
-    @Column(name = "id_payment_method")
-    private Integer id_pay_method;
-    private Integer user_id;
-    private Integer room_id;
+    @ManyToOne
+    private PaymentMethod paymentMethod;
+
+    @ManyToOne
+    private Users user;
+    @ManyToOne
+    private Rooms room;
+
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date in_date;
     @DateTimeFormat(pattern = "yyyy-mm-dd")

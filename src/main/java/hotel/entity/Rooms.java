@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -22,8 +23,18 @@ public class Rooms {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "type_room_id")
-    private Integer typeRoomId;
+    @ManyToOne
+    private TypeRooms typeRooms;
+
+    @ManyToMany
+    @JoinTable(
+            name = "room_services",
+            joinColumns = @JoinColumn(name = "room_id"),
+            foreignKey = @ForeignKey(name = "fk_room_id"),
+            inverseJoinColumns = @JoinColumn(name = "service_id"),
+            inverseForeignKey = @ForeignKey(name = "fk_service_id")
+    )
+    private List<Service> serviceList;
 
     @Column(name = "capacity")
     private Integer capacity;

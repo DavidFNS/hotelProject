@@ -3,7 +3,7 @@ package hotel.controller;
 import hotel.dto.ResponseDto;
 import hotel.dto.RoomServicesDto;
 import hotel.entity.RoomServices;
-import hotel.service.impl.RoomServiceServiceImpl;
+import hotel.service.impl.ServiceRoomServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RoomServicesController {
 
-    private final RoomServiceServiceImpl roomServiceService;
+    private final ServiceRoomServiceImpl roomServiceService;
 
     @PostMapping
     public ResponseDto<RoomServices> addRoomService(@RequestBody RoomServicesDto roomServicesDto){

@@ -14,17 +14,15 @@ import java.util.Optional;
 @Service
 public class CommentsServiceImpl implements CommentsService {
 
-    private final CommentMapper commentMapper;
     private final CommentsRepository commentsRepository;
 
-    public CommentsServiceImpl(CommentMapper commentMapper, CommentsRepository commentsRepository){
-        this.commentMapper = commentMapper;
+    public CommentsServiceImpl( CommentsRepository commentsRepository){
         this.commentsRepository = commentsRepository;
     }
 
     @Override
     public ResponseDto addComment(CommentsDto commentsDto) {
-        commentsRepository.save(commentMapper.toEntity(commentsDto));
+        commentsRepository.save(CommentMapper.toEntity(commentsDto));
         try {
             return ResponseDto.builder()
                     .code(200)
@@ -63,7 +61,7 @@ public class CommentsServiceImpl implements CommentsService {
     public ResponseDto<List<CommentsDto>> getComment() {
         List<Comments> comments = commentsRepository.findAll();
         List<CommentsDto> commentsDtos = comments.stream()
-                .map(commentMapper::toDto)
+                .map(CommentMapper::toDto)
                 .toList();
         return new ResponseDto<>(200, true, "OK", commentsDtos);
     }
@@ -72,8 +70,8 @@ public class CommentsServiceImpl implements CommentsService {
     public ResponseDto<CommentsDto> findById(Integer id) {
         if (commentsRepository.existsById(id)) {
             Comments comments = (commentsRepository.findById(id)).get();
-            return new ResponseDto<>(200, true, "OK", commentMapper.toDto(comments));
+            return new ResponseDto<>(200, true, "OK", CommentMapper.toDto(comments));
         }
-        return new ResponseDto<>(404, false, "Not working", null);
+        return new ResponseDto<>(404, false, "Not found!", null);
     }
 }

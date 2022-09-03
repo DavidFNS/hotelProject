@@ -14,16 +14,13 @@ import javax.persistence.*;
 @Builder
 @Table(name = "room_services")
 public class RoomServices {
-
     @Id
     @GeneratedValue(generator = "room_services_seq")
     @SequenceGenerator(name = "room_services_seq", sequenceName = "room_services_id_seq", allocationSize = 1)
-    @Column(name = "id")
+
     private Integer id;
 
-    @Column(name = "service_id")
-    private Integer serviceId;
+    private Integer service_id;
 
-    @Column(name = "room_id")
-    private Integer roomId;
+    private Integer room_id;
 }

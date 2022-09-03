@@ -6,24 +6,23 @@ import hotel.dto.RoomsDto;
 import hotel.entity.Rooms;
 import hotel.repository.RoomsRepository;
 import hotel.service.RoomsService;
-import hotel.service.mapper.RoomMapper;
+import hotel.service.mapper.RoomTypesMapper;
+import hotel.service.mapper.RoomsMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class RoomsServiceImpl implements RoomsService{
-    private final RoomMapper roomMapper;
     private final RoomsRepository roomsRepository;
 
-    public RoomsServiceImpl(RoomMapper roomMapper, RoomsRepository roomsRepository) {
-        this.roomMapper = roomMapper;
+    public RoomsServiceImpl( RoomsRepository roomsRepository) {
         this.roomsRepository = roomsRepository;
     }
 
     @Override
     public ResponseDto addRoom(RoomsDto roomsDto) {
-        Rooms rooms = roomMapper.toEntity(roomsDto);
+        Rooms rooms = RoomsMapper.toEntity(roomsDto);
         roomsRepository.save(rooms);
         ResponseDto<BookingDto> responseDto = new ResponseDto(200,true,"OK",roomsDto);
         return responseDto;
@@ -33,7 +32,7 @@ public class RoomsServiceImpl implements RoomsService{
     @Override
     public ResponseDto updateRoom(RoomsDto roomsDto) {
         if(roomsRepository.existsById(roomsDto.getId())){
-            Rooms rooms = roomMapper.toEntity(roomsDto);
+            Rooms rooms = RoomsMapper.toEntity(roomsDto);
             roomsRepository.save(rooms);
 
             return ResponseDto.builder().code(200).success(true).message("OK").build();
@@ -66,7 +65,7 @@ public class RoomsServiceImpl implements RoomsService{
         ResponseDto<RoomsDto> responseDto;
         if (roomsRepository.existsById(id)){
             Rooms rooms = (roomsRepository.findById(id)).get();
-            RoomsDto roomsDto = roomMapper.toDto(rooms);
+            RoomsDto roomsDto = RoomsMapper.toDto(rooms);
 
             responseDto = new ResponseDto<>(200,true,"OK",roomsDto);
             return responseDto;
@@ -85,7 +84,7 @@ public class RoomsServiceImpl implements RoomsService{
                 .map(b -> {
                             return RoomsDto.builder()
                                     .id(b.getId())
-                                    .typeRoomId(b.getTypeRoomId())
+                                    .typeRooms(RoomTypesMapper.toDtoWithoutRoomList(b.getTypeRooms()))
                                     .service(b.getService())
                                     .price(b.getPrice())
                                     .createdAt(b.getCreatedAt())

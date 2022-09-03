@@ -5,7 +5,7 @@ import hotel.dto.ServiceDto;
 
 import java.util.List;
 
-public interface ServiceeService {
+public interface ServiceService {
 
     ResponseDto<List<ServiceDto>> getAllService();
     ResponseDto<ServiceDto> getServiceById(Integer id);

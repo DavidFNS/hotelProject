@@ -6,7 +6,7 @@ import hotel.dto.TypeRoomsDto;
 import hotel.entity.TypeRooms;
 import hotel.repository.TypeRoomsRepository;
 import hotel.service.TypeRoomsService;
-import hotel.service.mapper.TypeRoomsMapper;
+import hotel.service.mapper.RoomTypesMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +17,9 @@ import java.util.List;
 public class TypeRoomsServiceImpl implements TypeRoomsService {
 
     private final TypeRoomsRepository typeRoomsRepository;
-    private final TypeRoomsMapper typeRoomsMapper;
-
     @Override
     public ResponseDto addTypeRoom(TypeRoomsDto typeRoomsDto) {
-        TypeRooms typeRooms = typeRoomsMapper.toEntity(typeRoomsDto);
+        TypeRooms typeRooms = RoomTypesMapper.toEntity(typeRoomsDto);
         typeRoomsRepository.save(typeRooms);
 
         ResponseDto<BookingDto> responseDto = new ResponseDto(200,true,"OK",typeRooms);
@@ -32,7 +30,7 @@ public class TypeRoomsServiceImpl implements TypeRoomsService {
     @Override
     public ResponseDto updateTypeRoom(TypeRoomsDto typeRoomsDto) {
         if(typeRoomsRepository.existsById(typeRoomsDto.getId())){
-            TypeRooms typeRooms = typeRoomsMapper.toEntity(typeRoomsDto);
+            TypeRooms typeRooms = RoomTypesMapper.toEntity(typeRoomsDto);
             typeRoomsRepository.save(typeRooms);
 
             return ResponseDto.builder().code(200).success(true).message("OK").build();
@@ -64,7 +62,7 @@ public class TypeRoomsServiceImpl implements TypeRoomsService {
         ResponseDto<TypeRoomsDto> responseDto;
         if (typeRoomsRepository.existsById(id)){
             TypeRooms typeRooms = (typeRoomsRepository.findById(id)).get();
-            TypeRoomsDto typeRoomsDto = typeRoomsMapper.toDto(typeRooms);
+            TypeRoomsDto typeRoomsDto = RoomTypesMapper.toDto(typeRooms);
 
             responseDto = new ResponseDto<>(200,true,"OK",typeRoomsDto);
             return responseDto;

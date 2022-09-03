@@ -5,7 +5,7 @@ import hotel.entity.RoomServices;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface RoomServiceServiceMapper {
-    RoomServices toEntity(RoomServicesDto dto);
-    RoomServicesDto toDto(RoomServices r);
+public interface RoomServiceMapper {
+    RoomServices toEntity(RoomServicesDto roomServicesDto);
+    RoomServicesDto toDto(RoomServices roomServices);
 }

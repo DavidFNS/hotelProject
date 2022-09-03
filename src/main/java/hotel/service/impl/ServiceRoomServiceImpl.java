@@ -6,18 +6,18 @@ import hotel.dto.RoomServicesDto;
 import hotel.entity.RoomServices;
 import hotel.repository.RoomServicesRepository;
 import hotel.service.RoomServicesService;
-import hotel.service.mapper.RoomServiceServiceMapper;
+import hotel.service.mapper.RoomServiceMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 
-public class RoomServiceServiceImpl implements RoomServicesService {
-    private final RoomServiceServiceMapper mapper;
+public class ServiceRoomServiceImpl implements RoomServicesService {
+    private final RoomServiceMapper mapper;
     private final RoomServicesRepository roomServicesRepository;
 
-    public RoomServiceServiceImpl(RoomServiceServiceMapper mapper, RoomServicesRepository roomServicesRepository) {
+    public ServiceRoomServiceImpl(RoomServiceMapper mapper, RoomServicesRepository roomServicesRepository) {
         this.mapper = mapper;
         this.roomServicesRepository = roomServicesRepository;
     }
@@ -73,9 +73,7 @@ public class RoomServiceServiceImpl implements RoomServicesService {
             responseDto = new ResponseDto<>(200,true,"OK",roomServicesDto);
             return responseDto;
         }
-        responseDto = new ResponseDto<>(200,true,"OK", null);
-
-        return responseDto;
+        return new ResponseDto<>(404,false,"Not found", null);
 
     }
 
@@ -87,8 +85,8 @@ public class RoomServiceServiceImpl implements RoomServicesService {
                 .map(b -> {
                             return RoomServicesDto.builder()
                                     .id(b.getId())
-                                    .roomId(b.getRoomId())
-                                    .serviceId(b.getServiceId())
+                                    .room_id(b.getRoom_id())
+                                    .service_id(b.getService_id())
                                     .build();
                         }
                 ).toList();

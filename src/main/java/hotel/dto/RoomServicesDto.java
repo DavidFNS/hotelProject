@@ -8,7 +8,7 @@ import lombok.Data;
 public class RoomServicesDto {
 
     private Integer id;
-    private Integer serviceId;
-    private Integer roomId;
+    private Integer service_id;
+    private Integer room_id;
 
 }

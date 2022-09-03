@@ -5,7 +5,7 @@ import hotel.entity.Admins;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface AdminsMapper {
+public interface AdminMapper {
     Admins toEntity(AdminsDto adminsDto);
     AdminsDto toDto(Admins admins);
 }

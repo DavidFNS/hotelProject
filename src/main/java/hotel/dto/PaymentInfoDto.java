@@ -10,7 +10,7 @@ import java.util.Date;
 @Builder
 public class PaymentInfoDto {
     private Integer id;
-    private Integer user_id;
+    private UsersDto users;
     private String card_sender;
     private String card_receiver;
     private String name_sender;

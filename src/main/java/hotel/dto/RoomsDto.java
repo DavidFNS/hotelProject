@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.List;
+
 
 @Data
 @Builder
@@ -14,10 +16,11 @@ import java.util.Date;
 @AllArgsConstructor
 public class RoomsDto {
     private Integer id;
-    private Integer typeRoomId;
+    private TypeRoomsDto typeRooms;
     private Integer capacity;
     private Boolean service;
     private Double price;
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date createdAt;
+    private List<ServiceDto> serviceList;
 }

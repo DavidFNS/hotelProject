@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,4 +28,7 @@ public class Service {
 
     @Column(name = "price")
     private Double price;
+
+    @ManyToMany(mappedBy = "serviceList")
+    private List<Rooms> roomsList;
 }

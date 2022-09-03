@@ -16,16 +16,13 @@ import java.util.Optional;
 public class CommentTypeServiceImpl implements CommentTypeService {
 
     private final CommentTypeRepository commentTypeRepository;
-    private final CommentTypeMapper commentTypeMapper;
-
-    public CommentTypeServiceImpl(CommentTypeRepository commentTypeRepository, CommentTypeMapper commentTypeMapper){
+    public CommentTypeServiceImpl(CommentTypeRepository commentTypeRepository){
         this.commentTypeRepository = commentTypeRepository;
-        this.commentTypeMapper = commentTypeMapper;
     }
 
     @Override
     public ResponseDto addCommentType(CommentTypeDto commentTypeDto) {
-        CommentType commentType = commentTypeMapper.toEntity(commentTypeDto);
+        CommentType commentType = CommentTypeMapper.toEntity(commentTypeDto);
         commentTypeRepository.save(commentType);
         try {
             return ResponseDto.builder()
@@ -44,16 +41,13 @@ public class CommentTypeServiceImpl implements CommentTypeService {
 
     @Override
     public ResponseDto updateCommentType(CommentTypeDto commentTypeDto) {
-        Optional<CommentType> optional = commentTypeRepository.findById(commentTypeDto.getId());
-        if(optional.isPresent()){
-            CommentType commentType = optional.get();
-            commentType.setId(commentTypeDto.getId() != null? commentTypeDto.getId() : commentType.getId());
-            commentType.setType_comment(commentType.getType_comment() != null? commentTypeDto.getType_comment() : commentType.getType_comment());
+        if(commentTypeRepository.existsById(commentTypeDto.getId())){
+            CommentType commentType = commentTypeRepository.findById(commentTypeDto.getId()).get();
             commentTypeRepository.save(commentType);
 
             return new ResponseDto(200, true, "OK", null);
         }
-        return new ResponseDto(404, false, "Not working", null);
+        return new ResponseDto(404, false, "Not found", null);
     }
 
     @Override
@@ -82,31 +76,22 @@ public class CommentTypeServiceImpl implements CommentTypeService {
                 .map(b ->
                         CommentTypeDto.builder()
                                 .id(b.getId())
-                                .type_comment(b.getType_comment())
+                                .type_comment(b.getName_type())
                                 .build())
                 .toList();
-        try {
             return ResponseDto.<List<CommentTypeDto>>builder()
                     .code(200)
                     .success(true)
                     .message("OK")
                     .data(commentTypesDtos)
                     .build();
-        } catch (Exception i){
-            return ResponseDto.<List<CommentTypeDto>>builder()
-                    .code(404)
-                    .success(false)
-                    .message("Not working!")
-                    .data(null)
-                    .build();
-        }
     }
 
     @Override
     public ResponseDto<CommentTypeDto> findById(Integer id) {
         Optional<CommentType> optional = commentTypeRepository.findById(id);
         if (optional.isPresent()){
-            CommentTypeDto commentTypeDto = commentTypeMapper.toDto(optional.get());
+            CommentTypeDto commentTypeDto = CommentTypeMapper.toDto(optional.get());
             return new ResponseDto<>(200, true, "OK", commentTypeDto);
 
         }

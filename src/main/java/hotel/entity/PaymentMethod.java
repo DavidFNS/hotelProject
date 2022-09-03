@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Builder
@@ -23,4 +24,5 @@ public class PaymentMethod {
 
     @Column(name = "name_method")
     private String name_method;
+
 }

@@ -2,34 +2,31 @@ package hotel.service.impl;
 
 import hotel.dto.ResponseDto;
 import hotel.dto.UsersDto;
+import hotel.entity.Comments;
 import hotel.entity.Users;
 import hotel.repository.UsersRepository;
 import hotel.service.UserService;
+import hotel.service.mapper.CommentMapper;
 import hotel.service.mapper.UsersMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.stream.Collectors.toList;
-
 @Service
 public class UsersServiceImpl implements UserService {
 
-    private final UsersMapper usersMapper;
     private final UsersRepository usersRepository;
 
-    public UsersServiceImpl(UsersRepository usersRepository, UsersMapper usersMapper){
+    public UsersServiceImpl(UsersRepository usersRepository){
         this.usersRepository = usersRepository;
-        this.usersMapper = usersMapper;
     }
 
     @Override
     public ResponseDto<List<UsersDto>> getUsersWhoOrderedBook() {
         List<Users> users = usersRepository.getUsersWhoOrderedRoom();
         List<UsersDto> usersDto = users.stream()
-                .map(usersMapper::toDto)
+                .map(UsersMapper::toDto)
                 .toList();
         if (usersDto.isEmpty()){
             return ResponseDto.<List<UsersDto>>builder()
@@ -43,14 +40,12 @@ public class UsersServiceImpl implements UserService {
     @Override
     public ResponseDto addUser(UsersDto usersDto) {
         try {
-            List<Users> users = usersRepository.findAll();
-            for(int i=0; i<users.size(); i++){
-                if(users.get(i).getEmail().equals(usersDto.getEmail())){
-                    return ResponseDto.builder().code(200).success(false).message("Bunday email mavjud!").build();
-                }
+
+            if(usersRepository.findByEmail(usersDto.getEmail()).size() != 0){
+                return ResponseDto.builder().code(200).success(false).message("Bunday email mavjud!").build();
             }
 
-            Users user = usersMapper.toEntity(usersDto);
+            Users user = UsersMapper.toEntity(usersDto);
             usersRepository.save(user);
                 return ResponseDto.builder()
                     .code(200)
@@ -68,24 +63,14 @@ public class UsersServiceImpl implements UserService {
 
     @Override
     public ResponseDto updateUser(UsersDto usersDto) {
-        Optional<Users> optional = usersRepository.findById(usersDto.getId());
-        if(optional.isPresent()){
-            Users users = optional.get();
-            users.setId(usersDto.getId() != null? usersDto.getId() : users.getId());
-            users.setFirstname(usersDto.getFirstName() != null? usersDto.getFirstName(): users.getFirstname());
-            users.setLastname(usersDto.getLastName() != null? usersDto.getLastName() : users.getLastname());
-            users.setAge(usersDto.getAge() != null? usersDto.getAge(): users.getAge());
-            users.setPhoneNumber(usersDto.getPhoneNumber() != null? usersDto.getPhoneNumber() : users.getPhoneNumber());
-            users.setEmail(usersDto.getEmail() != null? usersDto.getEmail() : users.getEmail());
-            users.setPassword(usersDto.getPassword() != null? usersDto.getPassword() : users.getPassword());
-            users.setAccount(usersDto.getAccount() != null? usersDto.getAccount() : users.getAccount());
-            users.setCreated_at(usersDto.getCreated_at() != null? usersDto.getCreated_at() : users.getCreated_at());
-            usersRepository.save(users);
+        if(usersRepository.existsById(usersDto.getId())){
+            Users user = usersRepository.findById(usersDto.getId()).get();
+            usersRepository.save(user);
 
             return new ResponseDto(200, true, "OK", null);
         }
 
-        return new ResponseDto(404, false, "Not working", null);
+        return new ResponseDto(404, false, "Not found!", null);
     }
 
     @Override
@@ -112,14 +97,18 @@ public class UsersServiceImpl implements UserService {
         List<Users> users = usersRepository.findAll();
 
         List<UsersDto> usersDto = users.stream()
-                .map(usersMapper::toDto)
+                .map(UsersMapper::toDto)
                 .toList();
         return new ResponseDto<>(200, true, "OK", usersDto);
     }
 
     @Override
     public ResponseDto<UsersDto> findById(Integer id) {
-        Optional<Users> optional = usersRepository.findById(id);
-        return optional.map(users -> new ResponseDto<>(200, true, "OK", usersMapper.toDto(users))).orElseGet(() -> new ResponseDto<>(404, false, "Not working", null));
+
+        if (usersRepository.existsById(id)) {
+            Users user = usersRepository.findById(id).get();
+            return new ResponseDto<>(200, true, "OK", UsersMapper.toDto(user));
+        }
+        return new ResponseDto<>(404, false, "Not found!", null);
     }
 }
