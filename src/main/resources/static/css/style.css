@@ -27,11 +27,14 @@ button::-moz-focus-inner {
 
 a,
 a:visited {
-  text-decoration: none;
+  text-decoration: none !important;
+}
+a:active{
+    color: #f12323 !important;
 }
 
 a:hover{
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 ul li {
@@ -50,6 +53,7 @@ body {
     font-weight: 400;
     line-height: 1.5;
     text-align: left;
+    font-size: 18px;
 }
 
 @font-face {
@@ -68,13 +72,17 @@ body {
     url('../fonts2/bodoni-initials.woff2') format('woff2'); /* Modern Browsers */
 }
 
+.nav-item{
+    margin-left: 5px;
+}
+
 .navbar-brand{
     font-family: "Bodoni Initials", "Bodoni MT";
     color: rgba(252, 227, 4, 0.726);
     font-size: 26px;
     font-weight: 100;
     line-height: 1em;
-    margin-top: 18px;
+    margin-top: 25px;
 }
 
 main{
@@ -88,24 +96,23 @@ main{
 .user {
     font-size: 25px;
     margin-top: 5px;
-    padding: 0px 15px 0px 150px;
+    padding: 0px 15px 0px 140px;
 }
 
 .menu {
     display: flex;
     align-items: center;
     position: relative;
-    border-bottom: 2px solid;
     text-align: center;
     font-family: Avenir,"Century Gothic",sans-serif;
   }
-  
+
   .menu nav > ul {
     display: flex;
     font-size: 24px;
     text-align: center;
   }
-  
+
   .menu nav ul li {
     display: flex;
     align-items: center;
@@ -122,7 +129,7 @@ main{
   .menu nav > ul li:hover .submenu {
     display: block;
     text-decoration: none;
-    color: turquoise;
+    color: #646161;
   }
 
 .submenu {
@@ -150,8 +157,9 @@ main{
 }
 
 .menu .submenu li a:hover {
-text-decoration: none;
-color: turquoise;
+    text-decoration: none;
+    color: #646161;
+    background: none;
 }
   
 .content {
@@ -245,6 +253,62 @@ article p {
     width: 100%;
 }
 
+.form-block {
+    margin-top: 50px;
+}
+
+.register {
+    margin: 70px auto;
+    width: 450px;
+    padding: 20px;
+    border: 1px solid black;
+    background: #7e7878;
+    border-radius: 10px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.register label {
+    color: #470f01;
+    font-size: 18px;
+}
+
+.register .input-group {
+    display: block;
+    margin: 10px 0px 10px 0px;
+}
+
+.register .input-group label {
+    display: block;
+    text-align: left;
+    margin: 15px 0px 8px 30px;
+}
+
+.register .input-group input {
+    height: 35px;
+    width: 350px;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+.input-group .btn {
+    padding: 10px;
+    font-size: 15px;
+    color: white;
+    background: #007bff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.input-group .btn:hover {
+    text-decoration: none;
+    background: #1962e9;
+    color: white;
+}
 
 /*Контейнеры с предложением*/
 
@@ -331,4 +395,5 @@ article p {
 
 footer {
     background: #212529;
+    font-size: 18px;
 }

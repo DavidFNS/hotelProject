@@ -16,10 +16,12 @@ public class AdminsServerImpl implements AdminsService {
     private final AdminsRepository adminsRepository;
     private final AdminMapper adminsMapper;
 
-
     @Override
     public ResponseDto addNewAdmin(AdminsDto adminsDto) {
         Admins admins = adminsMapper.toEntity(adminsDto);
+
+        admins.setBalance(123212D);
+
         adminsRepository.save(admins);
 
         return new ResponseDto<>(200, true, "Ok", adminsDto);

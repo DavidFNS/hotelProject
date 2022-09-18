@@ -1,6 +1,5 @@
 package hotel.repository;
 
-import hotel.dto.UsersDto;
 import hotel.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

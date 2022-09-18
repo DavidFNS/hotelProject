@@ -9,6 +9,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommentTypeRepository extends JpaRepository<CommentType, Integer> {
 
-    @Query("select '*' from Users")
-    UsersDto query_q(UsersDto usersDto);
 }

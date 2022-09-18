@@ -19,8 +19,6 @@ public class RoomServices {
     @SequenceGenerator(name = "room_services_seq", sequenceName = "room_services_id_seq", allocationSize = 1)
 
     private Integer id;
-
     private Integer service_id;
-
     private Integer room_id;
 }
